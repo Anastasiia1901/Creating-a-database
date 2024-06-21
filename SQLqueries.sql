@@ -5,13 +5,11 @@ CREATE TABLE IF NOT EXISTS Genre(
 
 CREATE TABLE IF NOT EXISTS Artists (
 	id SERIAL PRIMARY KEY,
-	genre_id INTEGER NOT NULL REFERENCES Genre(id),
 	name VARCHAR(40) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Albums (
 	id SERIAL PRIMARY KEY,
-	artist_id INTEGER NOT NULL REFERENCES Artists(id),
 	title VARCHAR(40) NOT NULL,
 	year_of_release YEAR CONSTRAINT check_year CHECK (year_of_release > 1900) 
 );
@@ -20,13 +18,11 @@ CREATE TABLE IF NOT EXISTS Tracks (
 	id SERIAL PRIMARY KEY,
 	album_id INTEGER NOT NULL REFERENCES Albums(id),
 	title VARCHAR(40) NOT NULL,
-	duration TIME NOT NULL
+	duration INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Collections (
 	id SERIAL PRIMARY KEY,
-	track_id INTEGER NOT NULL REFERENCES Tracks(id),
-	album_id INTEGER NOT NULL REFERENCES Albums(id),
 	title VARCHAR(40) NOT NULL,
 	year_of_release YEAR CONSTRAINT check_year CHECK (year_of_release > 1900) 
 );
